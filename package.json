@@ -20,6 +20,7 @@
     "rxjs": "7.8.2"
   },
   "devDependencies": {
+    "@darraghor/eslint-plugin-nestjs-typed": "^7.2.5",
     "@nestjs/testing": "11.2.11",
     "@types/node": "22.18.6",
     "@types/pg": "8.23.1",
