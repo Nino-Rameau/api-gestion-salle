@@ -7,8 +7,7 @@
     "lint": "eslint src test --no-error-on-unmatched-pattern",
     "build": "tsc",
     "start": "node --env-file-if-exists=.env dist/main.js",
-    "test": "npm run build && jest --runInBand",
-    "test:starter": "npm run build && jest --runInBand test/demarrage.test.js"
+    "test": "npm run build && jest --runInBand"
   },
   "dependencies": {
     "@nestjs/common": "11.2.11",
