@@ -1,0 +1,11 @@
+{
+  "include": ["src/**/*.ts"],
+  "minScore": 75,
+  "rules": {
+    "security/require-guards-on-endpoints": false
+  },
+  "telemetry": false,
+  "report": {
+    "telemetry": false
+  }
+}
