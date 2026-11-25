@@ -79,7 +79,7 @@ Remplacez l’URL d’exemple par celle de votre service.
 Si le service Free s’est mis en veille, laissez-lui le temps de redémarrer et refaites la requête.
 
 ```bash
-BASE=https://votre-service.onrender.com
+BASE=https://reservations-api-oi9v.onrender.com/
 curl -i "$BASE/health"
 curl -i "$BASE/salles" \
   -H 'Content-Type: application/json' \
