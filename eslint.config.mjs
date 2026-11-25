@@ -3,8 +3,16 @@ import eslintNestJs from "@darraghor/eslint-plugin-nestjs-typed";
 
 export default tseslint.config(
     eslint.configs.recommended,
+    tseslint.configs.recommended,
     tseslint.configs.strictTypeChecked,
     tseslint.configs.stylisticTypeChecked,
+    {
+        ignores: ['dist/**', 'coverage/**']
+    },
+    {
+        files: ['test/**/*.js'],
+        rules: { '@typescript-eslint/no-require-imports': 'off' }
+    },
     {
         languageOptions: {
             globals: {
