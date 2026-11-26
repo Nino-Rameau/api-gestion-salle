@@ -1,8 +1,4 @@
-import {
-  BadRequestException, Body, ConflictException, Controller, Delete, Get,
-  HttpCode, Module, NotFoundException, Param, ParseIntPipe, Post,
-  ServiceUnavailableException,
-} from '@nestjs/common'
+import { BadRequestException, Body, ConflictException, Controller, Delete, Get, HttpCode, Module, NotFoundException, Param, ParseIntPipe, Post, Query, ServiceUnavailableException } from '@nestjs/common'
 import { Database } from './database'
 import { lireCreneau, seChevauchent } from './regles'
 
@@ -52,6 +48,28 @@ export class Api {
       }
       throw erreur
     }
+  }
+
+  @Get('salles/disponibles')
+  @HttpCode(200)
+  async sallesDisponibles(@Query('debut') debut: unknown, @Query('fin') fin: unknown) {
+    const creneau = lireCreneau(debut, fin)
+    const disponibles = await this.db.pool.query<{ id: number, nom: string }>(
+      `SELECT id, nom FROM salles
+        WHERE id NOT IN (
+          SELECT salle_id FROM reservations
+          WHERE NOT (fin <= $1 OR debut >= $2)
+          )
+        ORDER BY id
+      `,
+      [creneau.debut, creneau.fin],
+    )
+    const result = disponibles.rows
+
+    if (!result.length) {
+      return [{ salle: [] }]
+    }
+    return result
   }
 
   @Get('reservations')
